@@ -40,6 +40,22 @@ async function main() {
         } as any
     })
 
+    // 3) GERENCIA GENERAL
+    const gerenciaPassword = await bcrypt.hash('Gerencia*2026*', 12)
+    await prisma.user.upsert({
+        where: { email: 'gerencia_general@clinicaieq.com' },
+        update: {
+            department: 'GLOBAL'
+        } as any,
+        create: {
+            name: 'Gerencia General IEQ',
+            email: 'gerencia_general@clinicaieq.com',
+            passwordHash: gerenciaPassword,
+            role: 'PRESIDENCIA',
+            department: 'GLOBAL'
+        } as any
+    })
+
 
     // Helper for dates
     const addDays = (days: number) => {
