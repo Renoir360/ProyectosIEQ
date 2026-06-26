@@ -36,10 +36,10 @@ export const TASK_STATUS_LABEL: Record<TaskStatus, string> = {
  * Colores de badges para estados de tareas
  */
 export const TASK_STATUS_COLOR: Record<TaskStatus, string> = {
-    BACKLOG: "badge-backlog",
-    READY: "badge-ready",
-    IN_PROGRESS: "badge-inprogress",
-    DONE: "badge-done",
+    BACKLOG: "bg-slate-100 text-slate-700 border-slate-200",
+    READY: "bg-amber-100 text-amber-700 border-amber-200",
+    IN_PROGRESS: "bg-blue-100 text-blue-700 border-blue-200",
+    DONE: "bg-green-100 text-green-700 border-green-200",
 }
 
 /**
