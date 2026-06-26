@@ -47,10 +47,10 @@ export function ProjectsClient({ initialData, user, selectedDept }: ProjectsClie
                         <div className="space-y-1 flex-1">
                             <div className="flex justify-between items-start">
                                 <div>
-                                    <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900">
+                                    <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-slate-100">
                                         Portafolio de <span className="text-[#1CB7BE]">Proyectos</span>
                                     </h1>
-                                    <p className="text-slate-600 font-semibold max-w-2xl leading-relaxed text-base sm:text-lg text-pretty">
+                                    <p className="text-slate-600 dark:text-slate-400 font-semibold max-w-2xl leading-relaxed text-base sm:text-lg text-pretty">
                                         Gestión estratégica y monitoreo de la cartera de proyectos tecnológicos IEQ 2026.
                                     </p>
                                 </div>

@@ -79,8 +79,8 @@ export default function LoginPage() {
                  style={{ background: 'var(--color-brand-dark)', opacity: 0.1 }} />
 
             <MotionWrapper direction="up" className="w-full max-w-5xl z-10">
-                <div className="w-full grid grid-cols-1 md:grid-cols-12 rounded-2xl overflow-hidden border border-[--login-border] shadow-2xl relative"
-                     style={{ background: 'var(--login-bg)' }}>
+                <div className="w-full grid grid-cols-1 md:grid-cols-12 rounded-2xl overflow-hidden shadow-2xl relative"
+                     style={{ background: 'var(--login-bg)', borderWidth: '1px', borderStyle: 'solid', borderColor: 'var(--login-border)' }}>
 
                     {/* PANEL IZQUIERDO: Branding + Stats reales */}
                     <div className="relative hidden md:flex md:col-span-7 flex-col justify-between overflow-hidden min-h-[520px] p-8 lg:p-10"

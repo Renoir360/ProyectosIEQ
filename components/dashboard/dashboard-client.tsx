@@ -77,14 +77,14 @@ export function DashboardClient({ initialData, user, selectedDept }: DashboardCl
 
                         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-8">
                             <div className="flex-1">
-                                <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-3 text-slate-900 leading-tight">
+                                <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-3 text-slate-900 dark:text-slate-100 leading-tight">
                                     Clínica IEQ <span className="text-[#1CB7BE] relative">WorkCenter
                                         <svg className="absolute -bottom-1 left-0 w-full h-2 text-[#1CB7BE]/30" viewBox="0 0 100 10" preserveAspectRatio="none">
                                             <path d="M0 5 Q 25 0, 50 5 T 100 5" stroke="currentColor" strokeWidth="4" fill="transparent" />
                                         </svg>
                                     </span>
                                 </h1>
-                                <p className="text-slate-600 max-w-2xl leading-relaxed font-medium text-base sm:text-lg mb-4">
+                                <p className="text-slate-600 dark:text-slate-400 max-w-2xl leading-relaxed font-medium text-base sm:text-lg mb-4">
                                     Visualiza el avance estratégico y hitos críticos de la transformación tecnológica de Clínica IEQ.
                                 </p>
                                 <div className="flex flex-wrap gap-3">
@@ -154,7 +154,7 @@ export function DashboardClient({ initialData, user, selectedDept }: DashboardCl
                             <div className="space-y-4">
                                 <div className="flex items-center gap-3 ml-2">
                                     <div className="w-1 h-6 bg-[#1CB7BE] rounded-full shadow-[0_0_10px_rgba(28,183,190,0.5)]" />
-                                    <h2 className="text-lg sm:text-xl font-extrabold text-slate-800 tracking-tight uppercase text-sm">Próximos Pendientes (7 días)</h2>
+                                    <h2 className="text-lg sm:text-xl font-extrabold text-slate-800 dark:text-slate-200 tracking-tight uppercase text-sm">Próximos Pendientes (7 días)</h2>
                                 </div>
                                 <UpcomingTasksList tasks={data.upcomingTasks} />
                             </div>
@@ -163,7 +163,7 @@ export function DashboardClient({ initialData, user, selectedDept }: DashboardCl
                         <StaggerItem className="space-y-4">
                             <div className="flex items-center gap-3 ml-2">
                                 <div className="w-1 h-6 bg-amber-500 rounded-full shadow-[0_0_10px_rgba(245,158,11,0.5)]" />
-                                <h2 className="text-lg sm:text-xl font-extrabold text-slate-800 tracking-tight uppercase text-sm">Top 5 Tareas Críticas</h2>
+                                <h2 className="text-lg sm:text-xl font-extrabold text-slate-800 dark:text-slate-200 tracking-tight uppercase text-sm">Top 5 Tareas Críticas</h2>
                             </div>
                             <CriticalTasksList tasks={data.criticalTasks} />
                         </StaggerItem>

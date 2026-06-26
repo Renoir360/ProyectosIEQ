@@ -30,11 +30,11 @@ export function PageHeader({ title, subtitle, actions, userName, userRole, selec
 
                 <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
                     <div className="space-y-1 flex-1">
-                        <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900">
+                        <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-slate-100">
                             {title}
                         </h1>
                         {subtitle && (
-                            <p className="text-slate-600 font-semibold max-w-2xl leading-relaxed text-base sm:text-lg">
+                            <p className="text-slate-600 dark:text-slate-400 font-semibold max-w-2xl leading-relaxed text-base sm:text-lg">
                                 {subtitle}
                             </p>
                         )}

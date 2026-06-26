@@ -43,7 +43,7 @@ export function UpcomingTasksList({ tasks }: { tasks: UpcomingTask[] }) {
                     <div className="glass-card rounded-xl p-4 shadow-sm transition-all duration-300 hover:glass-card-hover group cursor-pointer border-none overflow-hidden hover:scale-[1.01]">
                         <div className="flex items-start justify-between gap-4">
                             <div className="space-y-1.5">
-                                <h3 className="font-bold text-slate-800 group-hover:text-[#1CB7BE] transition-colors leading-none tracking-tight">
+                                <h3 className="font-bold text-slate-800 dark:text-slate-200 group-hover:text-[#1CB7BE] transition-colors leading-none tracking-tight">
                                     {task.title}
                                 </h3>
                                 <div className="flex items-center gap-3 text-[10px] font-bold uppercase tracking-wider text-slate-400">

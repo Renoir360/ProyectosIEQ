@@ -125,10 +125,10 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
 
                             <div className="flex-1 space-y-3">
                                 <div className="flex flex-wrap items-center gap-4">
-                                    <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900">{project.name}</h1>
+                                    <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-slate-100">{project.name}</h1>
                                     <ProjectStatusSelect projectId={project.id} initialStatus={project.status as ProjectStatus} userRole={user?.role} />
                                 </div>
-                                <p className="text-slate-600 font-medium text-lg max-w-3xl leading-relaxed">{project.description}</p>
+                                <p className="text-slate-600 dark:text-slate-400 font-medium text-lg max-w-3xl leading-relaxed">{project.description}</p>
                             </div>
 
                             <div className="flex flex-col sm:flex-row items-center gap-3">
@@ -148,21 +148,21 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
 
                     <div className="grid gap-4 md:grid-cols-4 relative z-10">
                         <div className="glass-card p-4 rounded-lg border hover:glass-card-hover transition-all">
-                            <div className="text-xs font-semibold text-slate-500 uppercase tracking-tight">Progreso</div>
+                            <div className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-tight">Progreso</div>
                             <div className="text-2xl font-bold text-[#1CB7BE]">{project.progress}%</div>
                         </div>
                         <div className="glass-card p-4 rounded-lg border hover:glass-card-hover transition-all">
-                            <div className="text-xs font-semibold text-slate-500 uppercase tracking-tight">Tareas Totales</div>
+                            <div className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-tight">Tareas Totales</div>
                             <div className="text-2xl font-bold text-slate-800">{allTasks.length}</div>
                         </div>
                         <div className="glass-card p-4 rounded-lg border hover:glass-card-hover transition-all">
-                            <div className="text-xs font-semibold text-slate-500 uppercase tracking-tight">Completadas</div>
+                            <div className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-tight">Completadas</div>
                             <div className="text-2xl font-bold text-green-600">
                                 {allTasks.filter(t => t.status === 'DONE').length}
                             </div>
                         </div>
                         <div className="glass-card p-4 rounded-lg border hover:glass-card-hover transition-all">
-                            <div className="text-xs font-semibold text-slate-500 uppercase tracking-tight">Fecha Inicio</div>
+                            <div className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-tight">Fecha Inicio</div>
                             <div className="flex items-center gap-2 font-bold text-slate-700">
                                 <Calendar className="h-4 w-4 text-[#1CB7BE]" />
                                 {new Date(project.createdAt).toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' })}
@@ -211,7 +211,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
                                     <AccordionItem key={area.id} value={area.id} className="border-none rounded-xl glass-card px-4 shadow-sm hover:glass-card-hover transition-all overflow-hidden">
                                         <AccordionTrigger className="hover:no-underline py-4">
                                             <div className="flex items-center justify-between w-full pr-4">
-                                                <span className="font-bold text-slate-800 tracking-tight">{area.name}</span>
+                                                <span className="font-bold text-slate-800 dark:text-slate-200 tracking-tight">{area.name}</span>
                                                 <Badge variant="outline" className="text-[10px] font-bold uppercase tracking-widest border-slate-300">
                                                     {area.tasks.length} tareas
                                                 </Badge>

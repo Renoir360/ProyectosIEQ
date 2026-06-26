@@ -30,7 +30,7 @@ function StatCard({ title, value, subtext, icon: Icon, tooltip, href }: { title:
                 )}
 
                 <div className="flex flex-row items-center justify-between space-y-0 pb-4 relative z-10 pointer-events-none">
-                    <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">{title}</span>
+                    <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">{title}</span>
                     <div className="flex items-center gap-2 pointer-events-auto">
                         <TooltipProvider>
                             <Tooltip>
@@ -46,8 +46,8 @@ function StatCard({ title, value, subtext, icon: Icon, tooltip, href }: { title:
                     </div>
                 </div>
                 <div className="relative z-10 pointer-events-none">
-                    <div className="text-3xl font-extrabold tracking-tight text-slate-900">{value}</div>
-                    <p className="text-[11px] font-bold text-slate-600 mt-1 uppercase tracking-wider">{subtext}</p>
+                    <div className="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-slate-100">{value}</div>
+                    <p className="text-[11px] font-bold text-slate-600 dark:text-slate-400 mt-1 uppercase tracking-wider">{subtext}</p>
                 </div>
             </div>
         </StaggerItem>

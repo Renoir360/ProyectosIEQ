@@ -47,7 +47,7 @@ export function CriticalTasksList({ tasks }: { tasks: CriticalTask[] }) {
                     <div className="p-4 space-y-3">
                         <div className="flex items-start justify-between gap-4">
                             <div className="flex-1 min-w-0">
-                                <Link href={`/projects/${task.projectId}`} className="font-bold text-sm text-slate-800 hover:text-[#1CB7BE] transition-colors line-clamp-2 leading-tight tracking-tight">
+                                <Link href={`/projects/${task.projectId}`} className="font-bold text-sm text-slate-800 dark:text-slate-200 hover:text-[#1CB7BE] transition-colors line-clamp-2 leading-tight tracking-tight">
                                     {task.title}
                                 </Link>
                                 <div className="flex items-center gap-1.5 mt-2 text-[10px] font-bold uppercase tracking-wider text-slate-400">

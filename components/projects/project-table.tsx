@@ -62,7 +62,7 @@ export function ProjectTable({ projects }: { projects: Project[] }) {
                                 <TableCell className="font-medium text-slate-500">{index + 1}</TableCell>
                                 <TableCell>
                                     <div className="flex flex-col">
-                                        <span className="font-bold text-slate-900">{project.name}</span>
+                                        <span className="font-bold text-slate-900 dark:text-slate-100">{project.name}</span>
                                         {project.startDate && (
                                             <span className="text-[10px] text-slate-500 flex items-center gap-1">
                                                 <Calendar className="h-3 w-3" />
@@ -117,7 +117,7 @@ export function ProjectTable({ projects }: { projects: Project[] }) {
                 {projects.map((project) => (
                     <div key={project.id} className="glass-card p-4 border border-white/20 rounded-lg shadow-sm space-y-3">
                         <div className="flex justify-between items-start">
-                            <h3 className="font-bold text-slate-900">{project.name}</h3>
+                            <h3 className="font-bold text-slate-900 dark:text-slate-100">{project.name}</h3>
                             <Badge variant="outline" className={STATUS_LABELS[project.status]?.color || ''}>
                                 {STATUS_LABELS[project.status]?.label || project.status}
                             </Badge>

@@ -60,7 +60,7 @@ export function StatusChart({ data }: { data: StatusData[] }) {
     return (
         <div className="col-span-1 glass-card rounded-xl shadow-md transition-all overflow-hidden group hover:glass-card-hover">
             <div className="p-6 pb-2">
-                <h3 className="text-base font-bold text-slate-800 uppercase tracking-tight">Distribución por Estado</h3>
+                <h3 className="text-base font-bold text-slate-800 dark:text-slate-200 uppercase tracking-tight">Distribución por Estado</h3>
             </div>
             <div className="h-[280px] pt-0 px-6">
                 <ResponsiveContainer width="100%" height="100%">
@@ -121,7 +121,7 @@ export function StatusChart({ data }: { data: StatusData[] }) {
             </div>
             <div className="px-6 pb-6 pt-0 grid grid-cols-2 gap-2">
                 {data.map((item, i) => (
-                    <div key={i} className="flex items-center gap-2 text-[11px] font-medium text-slate-600">
+                    <div key={i} className="flex items-center gap-2 text-[11px] font-medium text-slate-600 dark:text-slate-400">
                         <div className="w-2.5 h-2.5 rounded-full" style={{ background: item.fill }} />
                         <span className="truncate">{item.name}</span>
                         <span className="ml-auto text-slate-400 font-normal">{item.value}</span>
@@ -137,7 +137,7 @@ export function ProgressChart({ data }: { data: ProjectData[] }) {
     return (
         <div className="col-span-1 glass-card rounded-xl shadow-md transition-all overflow-hidden group hover:glass-card-hover">
             <div className="p-6 pb-2">
-                <h3 className="text-base font-bold text-slate-800 uppercase tracking-tight">Progreso por Proyecto</h3>
+                <h3 className="text-base font-bold text-slate-800 dark:text-slate-200 uppercase tracking-tight">Progreso por Proyecto</h3>
             </div>
             <div className="h-[280px] pt-4 px-6">
                 <ResponsiveContainer width="100%" height="100%">
