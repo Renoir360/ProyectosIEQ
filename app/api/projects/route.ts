@@ -1,3 +1,4 @@
+import { logError } from '@/lib/logger'
 import { NextResponse } from 'next/server'
 import prisma from '@/lib/db'
 import { z } from 'zod'
@@ -40,7 +41,7 @@ export async function POST(req: Request) {
         if (error instanceof z.ZodError) {
             return NextResponse.json({ fieldErrors: error.flatten().fieldErrors }, { status: 400 })
         }
-        console.error('[PROJECTS_POST]', error)
+        logError('PROJECTS_POST', error)
         return new NextResponse('Internal Error', { status: 500 })
     }
 }
@@ -79,7 +80,7 @@ export async function GET(req: Request) {
             headers: { 'Cache-Control': 'private, s-maxage=30, stale-while-revalidate=60' }
         })
     } catch (error) {
-        console.error('[PROJECTS_GET]', error)
+        logError('PROJECTS_GET', error)
         return new NextResponse('Internal Error', { status: 500 })
     }
 }

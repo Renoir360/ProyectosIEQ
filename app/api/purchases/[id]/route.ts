@@ -1,3 +1,4 @@
+import { logError } from '@/lib/logger'
 import { NextResponse } from 'next/server'
 import { revalidatePath } from 'next/cache'
 import prisma from '@/lib/db'
@@ -28,7 +29,7 @@ export async function GET(
 
         return NextResponse.json(purchase)
     } catch (error) {
-        console.error('[PURCHASE_GET]', error)
+        logError('PURCHASE_GET', error)
         return new NextResponse('Internal Error', { status: 500 })
     }
 }
@@ -110,7 +111,7 @@ export async function PATCH(
                 )
             }
         } catch (auditErr) {
-            console.error('Error al registrar auditoría de compra:', auditErr)
+            logError('error', auditErr)
         }
 
         // Notificar a Sistemas si Presidencia aprobó o rechazó la compra
@@ -133,7 +134,7 @@ export async function PATCH(
                         'Sistemas IEQ'
                     )
                 } catch (mailErr) {
-                    console.error('Error al enviar correo de aprobación/rechazo a Sistemas:', mailErr)
+                    logError('error', mailErr)
                 }
             }
         }
@@ -143,7 +144,7 @@ export async function PATCH(
 
         return NextResponse.json(purchase)
     } catch (error) {
-        console.error('[PURCHASE_PATCH]', error)
+        logError('PURCHASE_PATCH', error)
         return new NextResponse('Internal Error', { status: 500 })
     }
 }
@@ -164,7 +165,7 @@ export async function DELETE(
         revalidatePath('/compras')
         return NextResponse.json({ success: true })
     } catch (error) {
-        console.error('[PURCHASE_DELETE]', error)
+        logError('PURCHASE_DELETE', error)
         return new NextResponse('Internal Error', { status: 500 })
     }
 }

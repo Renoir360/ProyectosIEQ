@@ -1,3 +1,4 @@
+import { logError } from '@/lib/logger'
 import { NextRequest, NextResponse } from 'next/server'
 import prisma from '@/lib/db'
 
@@ -23,8 +24,8 @@ export async function PATCH(req: NextRequest) {
             data
         })
         return NextResponse.json(ap)
-    } catch (error: any) {
-        console.error('Error al actualizar AP:', error)
+    } catch (error: unknown) {
+        logError('error', error)
         return NextResponse.json({ error: 'Error al actualizar AP' }, { status: 500 })
     }
 }
@@ -40,8 +41,8 @@ export async function DELETE(req: NextRequest) {
             where: { id }
         })
         return NextResponse.json({ success: true })
-    } catch (error: any) {
-        console.error('Error al eliminar AP:', error)
+    } catch (error: unknown) {
+        logError('error', error)
         return NextResponse.json({ error: 'Error al eliminar AP' }, { status: 500 })
     }
 }

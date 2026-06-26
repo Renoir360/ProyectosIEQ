@@ -1,3 +1,4 @@
+import { logError } from '@/lib/logger'
 import { NextResponse } from 'next/server'
 import prisma from '@/lib/db'
 import { Prisma } from '@prisma/client'
@@ -54,7 +55,7 @@ export async function GET(request: Request) {
             totalPages: Math.ceil(total / limit)
         })
     } catch (error) {
-        console.error('[TASKS_GET]', error)
+        logError('TASKS_GET', error)
         return new NextResponse('Internal Error', { status: 500 })
     }
 }
@@ -105,12 +106,12 @@ export async function POST(request: Request) {
                 `Se creó la tarea "${task.title}" asignada a ${task.responsible || 'nadie'} por ${user.name}`
             )
         } catch (auditErr) {
-            console.error('Error al registrar auditoría de creación de tarea:', auditErr)
+            logError('error', auditErr)
         }
 
         return NextResponse.json(task)
     } catch (error) {
-        console.error('[TASKS_POST]', error)
+        logError('TASKS_POST', error)
         return new NextResponse('Internal Error', { status: 500 })
     }
 }

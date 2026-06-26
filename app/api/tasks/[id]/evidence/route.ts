@@ -1,3 +1,4 @@
+import { logError } from '@/lib/logger'
 import { NextResponse } from 'next/server'
 import prisma from '@/lib/db'
 import { createEvidenceSchema } from '@/lib/validators'
@@ -29,7 +30,7 @@ export async function POST(
 
         return NextResponse.json(evidence)
     } catch (error) {
-        console.error('[EVIDENCE_POST]', error)
+        logError('EVIDENCE_POST', error)
         return new NextResponse('Internal Error', { status: 500 })
     }
 }

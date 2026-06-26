@@ -1,3 +1,4 @@
+import { logError } from '@/lib/logger'
 import { NextRequest, NextResponse } from 'next/server'
 import { supabase } from '@/lib/supabase'
 
@@ -27,7 +28,7 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
             })
 
         if (error) {
-            console.error('Error al subir plano a Supabase:', error)
+            logError('error', error)
             return NextResponse.json({ error: `Error de almacenamiento: ${error.message}` }, { status: 500 })
         }
 
@@ -37,8 +38,8 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
             .getPublicUrl(filePath)
 
         return NextResponse.json({ publicUrl })
-    } catch (error: any) {
-        console.error('Error en endpoint de subida de plano:', error)
+    } catch (error: unknown) {
+        logError('error', error)
         return NextResponse.json({ error: 'Error interno del servidor al procesar el archivo' }, { status: 500 })
     }
 }

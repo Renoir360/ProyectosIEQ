@@ -31,13 +31,13 @@ interface ProjectData {
 }
 
 // Custom Tooltip component
-const CustomTooltip = ({ active, payload, label }: any) => {
+const CustomTooltip = ({ active, payload, label }: { active?: boolean; payload?: Array<{ name: string; value: number; color?: string; payload?: { fill?: string } }>; label?: string }) => {
     if (active && payload && payload.length) {
         return (
             <div className="glass-card p-3 border-none rounded-lg shadow-xl text-xs font-semibold">
                 <p className="text-slate-500 mb-1">{label}</p>
                 <div className="flex items-center gap-2">
-                    <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: payload[0].payload.fill || payload[0].color }} />
+                    <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: payload[0].payload?.fill || payload[0].color }} />
                     <span className="text-slate-800">{payload[0].name}: {payload[0].value}</span>
                 </div>
             </div>

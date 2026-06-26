@@ -31,7 +31,7 @@ export default async function ComprasPage({
     const limit = 10
     const skip = (page - 1) * limit
 
-    const where: any = {}
+    const where: Record<string, unknown> = {}
     if (params.type && params.type !== 'ALL') where.type = params.type
     if (params.status && params.status !== 'ALL') where.status = params.status
     if (params.projectId && params.projectId !== 'ALL') where.projectId = params.projectId

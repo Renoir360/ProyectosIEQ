@@ -1,3 +1,4 @@
+import { logError } from '@/lib/logger'
 import { NextRequest, NextResponse } from 'next/server'
 import prisma from '@/lib/db'
 import { TaskStatus } from '@prisma/client'
@@ -75,7 +76,7 @@ export async function GET(
             }))
         })
     } catch (error) {
-        console.error('Error exportando proyecto:', error)
+        logError('error', error)
         return NextResponse.json(
             { error: 'Error al exportar proyecto' },
             { status: 500 }

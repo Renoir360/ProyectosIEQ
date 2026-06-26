@@ -1,3 +1,4 @@
+import { logError } from '@/lib/logger'
 import { NextResponse } from 'next/server'
 import { revalidatePath } from 'next/cache'
 import prisma from '@/lib/db'
@@ -42,7 +43,7 @@ export async function GET(
 
         return NextResponse.json(project)
     } catch (error) {
-        console.error('[PROJECT_GET]', error)
+        logError('PROJECT_GET', error)
         return new NextResponse('Internal Error', { status: 500 })
     }
 }
@@ -79,7 +80,7 @@ export async function PATCH(
 
         return NextResponse.json(project)
     } catch (error) {
-        console.error('[PROJECT_PATCH]', error)
+        logError('PROJECT_PATCH', error)
         return new NextResponse('Internal Error', { status: 500 })
     }
 }

@@ -1,3 +1,4 @@
+import { logError } from '@/lib/logger'
 import { NextResponse } from 'next/server'
 import prisma from '@/lib/db'
 
@@ -12,7 +13,7 @@ export async function GET(request: Request) {
 
         const year2026Start = new Date('2026-01-01T00:00:00.000Z')
 
-        const where: any = { createdAt: { gte: year2026Start } }
+        const where: Record<string, unknown> = { createdAt: { gte: year2026Start } }
         if (type && type !== 'ALL') where.type = type
         if (status && status !== 'ALL') where.status = status
         if (projectId && projectId !== 'ALL') where.projectId = projectId
@@ -39,7 +40,7 @@ export async function GET(request: Request) {
 
         return NextResponse.json({ total, totalAmount, pending, approved })
     } catch (error) {
-        console.error('[PURCHASES_STATS_GET]', error)
+        logError('PURCHASES_STATS_GET', error)
         return new NextResponse('Internal Error', { status: 500 })
     }
 }

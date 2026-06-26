@@ -20,7 +20,7 @@ interface Stats {
     globalProgress: number
 }
 
-function StatCard({ title, value, subtext, icon: Icon, tooltip, href }: { title: string, value: string | number, subtext: string, icon: any, tooltip: string, href?: string }) {
+function StatCard({ title, value, subtext, icon: Icon, tooltip, href }: { title: string, value: string | number, subtext: string, icon: React.ElementType, tooltip: string, href?: string }) {
     return (
         <StaggerItem>
             <div className="bg-white dark:bg-slate-800 rounded-xl p-6 border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow duration-200 relative group">

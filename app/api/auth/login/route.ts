@@ -1,3 +1,4 @@
+import { logError } from '@/lib/logger'
 import { NextResponse } from 'next/server'
 import prisma from '@/lib/db'
 import bcrypt from 'bcryptjs'
@@ -46,7 +47,7 @@ export async function POST(request: Request) {
 
         const user = await prisma.user.findUnique({
             where: { email }
-        }) as any // Cast to any to avoid stale type validation errors
+        })
 
         if (!user) {
             return NextResponse.json({ error: 'Credenciales inválidas' }, { status: 401 })
@@ -82,7 +83,7 @@ export async function POST(request: Request) {
         return NextResponse.json({ success: true, redirect: '/dashboard' })
 
     } catch (error) {
-        console.error('Login error:', error)
+        logError('LOGIN', error)
         return NextResponse.json({ error: 'Error interno del servidor' }, { status: 500 })
     }
 }

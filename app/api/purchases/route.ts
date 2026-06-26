@@ -1,3 +1,4 @@
+import { logError } from '@/lib/logger'
 import { NextResponse } from 'next/server'
 import prisma from '@/lib/db'
 import { createPurchaseRequestSchema } from '@/lib/validators'
@@ -17,7 +18,7 @@ export async function GET(request: Request) {
         const skip = (page - 1) * limit
 
         // Build where clause
-        const where: any = {}
+        const where: Record<string, unknown> = {}
         if (type && type !== 'ALL') where.type = type
         if (status && status !== 'ALL') where.status = status
         if (projectId && projectId !== 'ALL') where.projectId = projectId
@@ -47,7 +48,7 @@ export async function GET(request: Request) {
             }
         })
     } catch (error) {
-        console.error('[PURCHASES_GET]', error)
+        logError('PURCHASES_GET', error)
         return new NextResponse('Internal Error', { status: 500 })
     }
 }
@@ -71,7 +72,7 @@ export async function POST(request: Request) {
         const purchase = await prisma.purchaseRequest.create({
             data: {
                 ...result.data,
-                department: user.department as any
+                department: user.department as 'SISTEMAS' | 'GLOBAL'
             },
             include: {
                 project: {
@@ -89,7 +90,7 @@ export async function POST(request: Request) {
                 `Se creó una solicitud de compra de tipo "${purchase.type}" para "${purchase.title}" por un monto de $${purchase.estimatedAmount} por ${user.name}`
             )
         } catch (auditErr) {
-            console.error('Error al registrar auditoría de creación de compra:', auditErr)
+            logError('error', auditErr)
         }
 
         // Notificar a Presidencia si está en revisión
@@ -103,13 +104,13 @@ export async function POST(request: Request) {
                     'Presidencia IEQ'
                 )
             } catch (mailErr) {
-                console.error('Error al enviar correo a Presidencia:', mailErr)
+                logError('error', mailErr)
             }
         }
 
         return NextResponse.json(purchase, { status: 201 })
     } catch (error) {
-        console.error('[PURCHASES_POST]', error)
+        logError('PURCHASES_POST', error)
         return new NextResponse('Internal Error', { status: 500 })
     }
 }

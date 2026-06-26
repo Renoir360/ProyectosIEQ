@@ -9,8 +9,8 @@ import { MotionWrapper } from '@/components/ui/motion-wrapper'
 import { CompactUserMenu } from '@/components/ui/compact-user-menu'
 
 interface ProjectsClientProps {
-    initialData: any
-    user: any
+    initialData: Record<string, unknown>[]
+    user: { role?: string; name?: string } | null
 }
 
 export function ProjectsClient({ initialData, user }: ProjectsClientProps) {

@@ -1,3 +1,4 @@
+import { logError } from '@/lib/logger'
 
 import { NextRequest, NextResponse } from 'next/server'
 import prisma from '@/lib/db'
@@ -33,12 +34,12 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
             const { logAuditEvent } = await import('@/lib/audit')
             await logAuditEvent(projectId, 'CREACION_PLANO', `Se subió el plano WiFi "${name}"`)
         } catch (auditErr) {
-            console.error('Error al registrar auditoría de plano:', auditErr)
+            logError('error', auditErr)
         }
 
         return NextResponse.json(floorplan)
-    } catch (error: any) {
-        console.error('Error al crear plano:', error)
+    } catch (error: unknown) {
+        logError('error', error)
         return NextResponse.json({ error: 'Error al crear plano' }, { status: 500 })
     }
 }
@@ -66,12 +67,12 @@ export async function DELETE(req: NextRequest, { params }: { params: Promise<{ i
             const { logAuditEvent } = await import('@/lib/audit')
             await logAuditEvent(projectId, 'ELIMINACION_PLANO', `Se eliminó el plano WiFi "${floorplan.name}"`)
         } catch (auditErr) {
-            console.error('Error al registrar auditoría:', auditErr)
+            logError('error', auditErr)
         }
 
         return NextResponse.json({ success: true })
-    } catch (error: any) {
-        console.error('Error al eliminar plano:', error)
+    } catch (error: unknown) {
+        logError('error', error)
         return NextResponse.json({ error: 'Error al eliminar plano' }, { status: 500 })
     }
 }

@@ -1,3 +1,4 @@
+import { logError } from '@/lib/logger'
 import { NextRequest, NextResponse } from 'next/server'
 import prisma from '@/lib/db'
 import { supabase } from '@/lib/supabase'
@@ -39,7 +40,7 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
             })
 
         if (error) {
-            console.error('Error al subir a Supabase Storage:', error)
+            logError('error', error)
             return NextResponse.json({ error: `Error en almacenamiento: ${error.message}` }, { status: 500 })
         }
 
@@ -75,12 +76,12 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
                 `El usuario ${user?.name || 'Sistemas'} subió la evidencia física "${file.name}"`
             )
         } catch (auditErr) {
-            console.error('Error al registrar auditoría de evidencia:', auditErr)
+            logError('error', auditErr)
         }
 
         return NextResponse.json(evidence)
-    } catch (error: any) {
-        console.error('Error en ruta de subida de evidencia:', error)
+    } catch (error: unknown) {
+        logError('error', error)
         return NextResponse.json({ error: 'Error interno del servidor al procesar la subida' }, { status: 500 })
     }
 }

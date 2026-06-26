@@ -398,8 +398,8 @@ export function WifiFloorplan({ projectId, userRole }: WifiFloorplanProps) {
                 updateFloorplanAps(selected.id, aps => aps.map(ap => ap.id === selectedAp.id ? updatedAp : ap))
             }
             setApModalOpen(false)
-        } catch (err: any) {
-            toast({ title: 'Error', description: err.message, variant: 'destructive' })
+        } catch (err: unknown) {
+            toast({ title: 'Error', description: err instanceof Error ? err.message : 'Error inesperado', variant: 'destructive' })
         } finally {
             setIsSavingAp(false)
         }
@@ -418,8 +418,8 @@ export function WifiFloorplan({ projectId, userRole }: WifiFloorplanProps) {
             toast({ title: 'AP Eliminado', description: `El AP "${selectedAp.name}" fue removido.` })
             updateFloorplanAps(selected.id, aps => aps.filter(ap => ap.id !== selectedAp.id))
             setApModalOpen(false)
-        } catch (err: any) {
-            toast({ title: 'Error al eliminar', description: err.message, variant: 'destructive' })
+        } catch (err: unknown) {
+            toast({ title: 'Error al eliminar', description: err instanceof Error ? err.message : 'Error inesperado', variant: 'destructive' })
         } finally {
             setIsDeletingAp(false)
         }
@@ -441,8 +441,8 @@ export function WifiFloorplan({ projectId, userRole }: WifiFloorplanProps) {
             setSelectedId(floorplans.find(fp => fp.id !== selected.id)?.id ?? null)
             setIsDeleteFpOpen(false)
             setIsEditMode(false)
-        } catch (err: any) {
-            toast({ title: 'Error', description: err.message, variant: 'destructive' })
+        } catch (err: unknown) {
+            toast({ title: 'Error', description: err instanceof Error ? err.message : 'Error inesperado', variant: 'destructive' })
         } finally {
             setIsDeletingFp(false)
         }
@@ -492,8 +492,8 @@ export function WifiFloorplan({ projectId, userRole }: WifiFloorplanProps) {
             setFloorplans(prev => [...prev, newFp])
             setSelectedId(newFp.id)
             setIsUploadPreviewOpen(false)
-        } catch (err: any) {
-            toast({ title: 'Error de subida', description: err.message, variant: 'destructive' })
+        } catch (err: unknown) {
+            toast({ title: 'Error de subida', description: err instanceof Error ? err.message : 'Error inesperado', variant: 'destructive' })
         } finally {
             setIsUploadingBlueprint(false)
             if (uploadPreview) URL.revokeObjectURL(uploadPreview)

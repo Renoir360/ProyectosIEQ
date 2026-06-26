@@ -1,3 +1,4 @@
+import { logError } from '@/lib/logger'
 import { NextResponse } from 'next/server'
 import prisma from '@/lib/db'
 import { Prisma, ProjectStatus } from '@prisma/client'
@@ -22,8 +23,8 @@ export async function PATCH(
         const result = updateTaskSchema.safeParse(body)
 
         if (!result.success) {
-            console.error('[TASK_PATCH] Invalid body:', body)
-            console.error('[TASK_PATCH] Validation error:', result.error.flatten())
+            logError('TASK_PATCH] Invalid body:', body)
+            logError('TASK_PATCH] Validation error:', result.error.flatten())
             return NextResponse.json(result.error.flatten(), { status: 400 })
         }
 
@@ -128,12 +129,12 @@ export async function PATCH(
                 )
             }
         } catch (auditErr) {
-            console.error('Error al registrar auditoría de tarea:', auditErr)
+            logError('error', auditErr)
         }
 
         return NextResponse.json(updatedTask)
     } catch (error) {
-        console.error('[TASK_PATCH_ERROR]', error)
+        logError('TASK_PATCH_ERROR', error)
         const message = error instanceof Error ? error.message : 'Internal Server Error'
         return NextResponse.json(
             { error: message },

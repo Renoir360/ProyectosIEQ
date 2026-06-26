@@ -1,3 +1,4 @@
+import { logError } from '@/lib/logger'
 import { NextResponse } from 'next/server'
 import prisma from '@/lib/db'
 import { getCurrentUser } from '@/lib/auth'
@@ -120,7 +121,7 @@ export async function GET() {
             headers: { 'Cache-Control': 'private, s-maxage=30, stale-while-revalidate=60' }
         })
     } catch (error) {
-        console.error('[DASHBOARD_GET]', error)
+        logError('DASHBOARD_GET', error)
         return new NextResponse('Internal Error', { status: 500 })
     }
 }

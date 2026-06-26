@@ -19,7 +19,7 @@ const TaskPriority = {
 
 export const dynamic = 'force-dynamic'
 
-async function getDashboardData(whereClause: any) {
+async function getDashboardData(whereClause: Record<string, unknown>) {
     const now = new Date()
     const next7Days = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000)
 

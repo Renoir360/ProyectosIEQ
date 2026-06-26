@@ -123,9 +123,9 @@ export function TaskList({ tasks, areas = [], userRole }: { tasks: TaskWithEvide
             setSelectedFile(null)
             setSelectedTaskForEvidence(null)
             router.refresh()
-        } catch (error: any) {
-            console.error(error)
-            toast({ variant: 'destructive', title: 'Error', description: error.message || 'Error al agregar evidencia' })
+        } catch (error: unknown) {
+            const message = error instanceof Error ? error.message : 'Error al agregar evidencia'
+            toast({ variant: 'destructive', title: 'Error', description: message })
         } finally {
             setIsUploading(false)
         }
