@@ -119,12 +119,12 @@
 
 /* === APP BACKGROUND === */
 .dashboard-bg {
-  background-color: #F1F5F9;
+  background: #dce3ea;
   min-height: 100vh;
 }
 
 .dark .dashboard-bg {
-  background-color: #0f172a;
+  background: #0c1320;
 }
 
 /* === FLAT CARDS (replaces glassmorphism) === */

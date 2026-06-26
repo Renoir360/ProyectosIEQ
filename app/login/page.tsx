@@ -44,7 +44,7 @@ export default function LoginPage() {
     }
 
     return (
-        <div className="flex min-h-screen items-center justify-center p-4 bg-[#F1F5F9]">
+        <div className="flex min-h-screen items-center justify-center p-4 bg-[#dce3ea]">
             <div className="w-full max-w-4xl z-10">
                 <div className="w-full grid grid-cols-1 md:grid-cols-12 rounded-2xl overflow-hidden border border-slate-200 bg-white shadow-xl">
 
