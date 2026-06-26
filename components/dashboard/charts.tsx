@@ -58,7 +58,7 @@ export function StatusChart({ data }: { data: StatusData[] }) {
     ]
 
     return (
-        <div className="col-span-1 glass-card rounded-xl shadow-md transition-all overflow-hidden group hover:glass-card-hover">
+        <div className="col-span-1 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm transition-shadow overflow-hidden hover:shadow-md">
             <div className="p-6 pb-2">
                 <h3 className="text-base font-bold text-slate-800 dark:text-slate-200 uppercase tracking-tight">Distribución por Estado</h3>
             </div>
@@ -135,7 +135,7 @@ export function StatusChart({ data }: { data: StatusData[] }) {
 // Chart 2: Bar for Project Progress
 export function ProgressChart({ data }: { data: ProjectData[] }) {
     return (
-        <div className="col-span-1 glass-card rounded-xl shadow-md transition-all overflow-hidden group hover:glass-card-hover">
+        <div className="col-span-1 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm transition-shadow overflow-hidden hover:shadow-md">
             <div className="p-6 pb-2">
                 <h3 className="text-base font-bold text-slate-800 dark:text-slate-200 uppercase tracking-tight">Progreso por Proyecto</h3>
             </div>

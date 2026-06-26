@@ -48,186 +48,108 @@
 
 :root {
   --radius: 0.625rem;
-  --background: #E9EEF2;
+  --background: #F1F5F9;
   --foreground: #020617;
   --card: #ffffff;
   --card-foreground: #020617;
   --popover: #ffffff;
   --popover-foreground: #020617;
-  --primary: #226E80;
+  --primary: #1CB7BE;
   --primary-foreground: #ffffff;
   --secondary: #f1f5f9;
   --secondary-foreground: #0f172a;
   --muted: #f1f5f9;
   --muted-foreground: #64748b;
-  --accent: #2BB9BF;
+  --accent: #1CB7BE;
   --accent-foreground: #0f172a;
   --destructive: #ef4444;
   --border: #e2e8f0;
   --input: #e2e8f0;
-  --ring: #2BB9BF;
+  --ring: #1CB7BE;
 
-  /* Chart Tokens */
   --chart-1: #94a3b8;
-  /* Pendiente - Gris neutro */
   --chart-2: #f59e0b;
-  /* Listo - Ámbar suave */
-  --chart-3: #2BB9BF;
-  /* En progreso - Turquesa Marca */
+  --chart-3: #1CB7BE;
   --chart-4: #16a34a;
-  /* Completado - Verde suave */
-  --chart-5: #226E80;
-  /* Branding Petróleo */
+  --chart-5: #177388;
 
   --sidebar: #ffffff;
   --sidebar-foreground: #0f172a;
-  --sidebar-primary: #226E80;
+  --sidebar-primary: #1CB7BE;
   --sidebar-primary-foreground: #ffffff;
   --sidebar-accent: #f1f5f9;
-  --sidebar-accent-foreground: #226E80;
+  --sidebar-accent-foreground: #177388;
   --sidebar-border: #e2e8f0;
-  --sidebar-ring: #2BB9BF;
+  --sidebar-ring: #1CB7BE;
+
+  --color-brand: #1CB7BE;
+  --color-brand-dark: #177388;
+  --color-brand-light: #e5f7f9;
 }
 
 .dark {
-  --background: #020617;
+  --background: #0f172a;
   --foreground: #f8fafc;
-  --card: #0f172a;
+  --card: #1e293b;
   --card-foreground: #f8fafc;
-  --popover: #0f172a;
+  --popover: #1e293b;
   --popover-foreground: #f8fafc;
-  --primary: #2BB9BF;
+  --primary: #1CB7BE;
   --primary-foreground: #0f172a;
   --secondary: #1e293b;
   --secondary-foreground: #f8fafc;
   --muted: #1e293b;
   --muted-foreground: #94a3b8;
-  --accent: #226E80;
+  --accent: #177388;
   --accent-foreground: #f8fafc;
   --destructive: #7f1d1d;
-  --border: #1e293b;
-  --input: #1e293b;
-  --ring: #2BB9BF;
+  --border: #334155;
+  --input: #334155;
+  --ring: #1CB7BE;
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
-
   body {
     @apply bg-background text-foreground;
   }
 }
 
-/* === VARIABLES DE COLOR CORPORATIVO IEQ === */
-:root {
-  --color-brand: #1CB7BE;
-  --color-brand-dark: #177388;
-  --color-brand-light: #e5f7f9;
-  --color-gray-light: #a6c5cb;
-  --color-gray-mid: #769199;
-
-  /* Login-specific (consume design system) */
-  --login-bg: #030c14;
-  --login-card: rgba(3, 12, 20, 0.6);
-  --login-border: rgba(28, 183, 190, 0.15);
-}
-
-.dark {
-  --login-bg: #020617;
-  --login-card: rgba(15, 23, 42, 0.6);
-}
-
-/* === GRADIENTES DE FONDO VIBRANTES (Para que el glass se note) === */
+/* === APP BACKGROUND === */
 .dashboard-bg {
-  background-color: #f1f5f9;
-  background-image:
-    radial-gradient(at 0% 0%, rgba(28, 183, 190, 0.4) 0px, transparent 50%),
-    radial-gradient(at 100% 0%, rgba(43, 185, 191, 0.3) 0px, transparent 50%),
-    radial-gradient(at 50% 100%, rgba(59, 130, 246, 0.2) 0px, transparent 50%),
-    radial-gradient(at 100% 100%, rgba(28, 183, 190, 0.3) 0px, transparent 50%),
-    radial-gradient(at 0% 100%, rgba(34, 197, 94, 0.2) 0px, transparent 50%);
-  background-attachment: fixed;
+  background-color: #F1F5F9;
   min-height: 100vh;
 }
 
 .dark .dashboard-bg {
-  background-color: #020617;
-  background-image:
-    radial-gradient(at 0% 0%, rgba(28, 183, 190, 0.3) 0px, transparent 55%),
-    radial-gradient(at 100% 0%, rgba(79, 70, 229, 0.2) 0px, transparent 55%),
-    radial-gradient(at 50% 100%, rgba(59, 130, 246, 0.1) 0px, transparent 55%),
-    radial-gradient(at 100% 100%, rgba(28, 183, 190, 0.25) 0px, transparent 55%),
-    radial-gradient(at 0% 100%, rgba(13, 148, 136, 0.2) 0px, transparent 55%),
-    linear-gradient(135deg, #020617 0%, #0f172a 100%);
+  background-color: #0f172a;
 }
 
-.project-header-gradient {
-  background: linear-gradient(135deg, rgba(28, 183, 190, 0.9) 0%, rgba(23, 115, 136, 0.9) 100%);
-  backdrop-filter: blur(8px);
-}
-
-.dark .project-header-gradient {
-  background: linear-gradient(135deg, rgba(28, 183, 190, 0.3) 0%, rgba(23, 115, 136, 0.3) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-/* === TRUE GLASSMORPHISM CARDS === */
+/* === FLAT CARDS (replaces glassmorphism) === */
 .glass-card {
-  background: rgba(255, 255, 255, 0.15);
-  /* MUCHO más transparente */
-  backdrop-filter: blur(24px) saturate(180%);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  box-shadow:
-    0 4px 24px -1px rgba(0, 0, 0, 0.05),
-    0 2px 12px -1px rgba(0, 0, 0, 0.02);
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04);
 }
 
 .dark .glass-card {
-  background: rgba(15, 23, 42, 0.6);
-  backdrop-filter: blur(24px) saturate(150%);
-  -webkit-backdrop-filter: blur(24px) saturate(150%);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow:
-    0 4px 24px -1px rgba(0, 0, 0, 0.4),
-    0 2px 12px -1px rgba(0, 0, 0, 0.3);
+  background: #1e293b;
+  border: 1px solid #334155;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
 }
 
 .glass-card-hover {
-  background: rgba(255, 255, 255, 0.25);
-  backdrop-filter: blur(30px) saturate(200%);
-  -webkit-backdrop-filter: blur(30px) saturate(200%);
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  box-shadow:
-    0 12px 48px -10px rgba(28, 183, 190, 0.2),
-    0 4px 20px -5px rgba(0, 0, 0, 0.05);
-  transform: translateY(-5px);
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.08);
+  transition: box-shadow 0.2s ease;
 }
 
 .dark .glass-card-hover {
-  background: rgba(30, 41, 59, 0.7);
-  border: 1px solid rgba(28, 183, 190, 0.3);
-  box-shadow:
-    0 20px 48px -12px rgba(0, 0, 0, 0.6),
-    0 0 20px rgba(28, 183, 190, 0.1);
+  box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.4);
 }
 
-/* === BOTONES CON GRADIENTE === */
-.btn-gradient-teal {
-  background: linear-gradient(135deg, #1cb7be 0%, #177388 100%);
-  box-shadow: 0 4px 16px rgba(28, 183, 190, 0.3);
-  transition: all 0.3s ease;
-}
-
-.btn-gradient-teal:hover {
-  box-shadow: 0 6px 24px rgba(28, 183, 190, 0.4);
-  transform: translateY(-2px);
-}
-
-/* === PROGRESS BARS MEJORADOS === */
+/* === PROGRESS BARS === */
 .progress-bar-container {
   background: rgba(148, 163, 184, 0.2);
   border-radius: 9999px;
@@ -236,74 +158,39 @@
 }
 
 .progress-bar-fill {
-  background: linear-gradient(90deg, #1cb7be 0%, #22d3dd 100%);
+  background: #1CB7BE;
   height: 100%;
   border-radius: 9999px;
-  box-shadow: 0 2px 8px rgba(28, 183, 190, 0.3);
-  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: width 0.6s ease;
 }
 
-/* === SCROLLBAR PERSONALIZADO === */
+/* === SCROLLBAR === */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(148, 163, 184, 0.1);
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(28, 183, 190, 0.5);
-  border-radius: 4px;
+  background: rgba(148, 163, 184, 0.4);
+  border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(28, 183, 190, 0.7);
+  background: rgba(148, 163, 184, 0.6);
 }
 
 /* === SKELETON LOADERS === */
 .skeleton {
-  background: linear-gradient(90deg,
-      rgba(229, 247, 249, 0.4) 0%,
-      rgba(166, 197, 203, 0.4) 50%,
-      rgba(229, 247, 249, 0.4) 100%);
+  background: linear-gradient(90deg, #e2e8f0 0%, #f1f5f9 50%, #e2e8f0 100%);
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
 }
 
 @keyframes shimmer {
-  0% {
-    background-position: -200% 0;
-  }
-
-  100% {
-    background-position: 200% 0;
-  }
-}
-
-/* === BADGES DE STATUS CON GLOW === */
-.badge-done {
-  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
-  box-shadow: 0 2px 12px rgba(34, 197, 94, 0.3);
-}
-
-.badge-inprogress {
-  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-  box-shadow: 0 2px 12px rgba(59, 130, 246, 0.3);
-}
-
-.badge-blocked {
-  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-  box-shadow: 0 2px 12px rgba(239, 68, 68, 0.3);
-}
-
-.badge-ready {
-  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
-  box-shadow: 0 2px 12px rgba(251, 191, 36, 0.3);
-}
-
-.badge-backlog {
-  background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
-  box-shadow: 0 2px 12px rgba(107, 114, 128, 0.3);
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
 }

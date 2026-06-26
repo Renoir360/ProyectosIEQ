@@ -152,6 +152,8 @@ model Floorplan {
   accessPoints AccessPointPlacement[]
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+
+  @@unique([projectId, name])
 }
 
 model AccessPointPlacement {

@@ -218,8 +218,10 @@ async function main() {
     })
 
     // Project 1 Floorplans (WiFi 6)
-    const p1FloorplanSurgical = await prisma.floorplan.create({
-        data: {
+    const p1FloorplanSurgical = await prisma.floorplan.upsert({
+        where: { projectId_name: { projectId: p1.id, name: 'Piso 1 - Quirófanos' } } as any,
+        update: {},
+        create: {
             projectId: p1.id,
             name: 'Piso 1 - Quirófanos',
             imageUrl: '/floorplans/wifi6-surgical.png',
@@ -227,8 +229,10 @@ async function main() {
         }
     })
 
-    const p1FloorplanMaternity = await prisma.floorplan.create({
-        data: {
+    const p1FloorplanMaternity = await prisma.floorplan.upsert({
+        where: { projectId_name: { projectId: p1.id, name: 'Piso 2 - Maternidad' } } as any,
+        update: {},
+        create: {
             projectId: p1.id,
             name: 'Piso 2 - Maternidad',
             imageUrl: '/floorplans/wifi6-maternity-lobby.png',
@@ -236,8 +240,10 @@ async function main() {
         }
     })
 
-    const p1FloorplanAdultER = await prisma.floorplan.create({
-        data: {
+    const p1FloorplanAdultER = await prisma.floorplan.upsert({
+        where: { projectId_name: { projectId: p1.id, name: 'Piso 1 - Emergencia Adultos' } } as any,
+        update: {},
+        create: {
             projectId: p1.id,
             name: 'Piso 1 - Emergencia Adultos',
             imageUrl: '/floorplans/wifi6-adult-er.png',
@@ -355,8 +361,10 @@ async function main() {
     })
 
     // Project 2 Floorplans (UCI Pediátrica)
-    const p2Floorplan = await prisma.floorplan.create({
-        data: {
+    const p2Floorplan = await prisma.floorplan.upsert({
+        where: { projectId_name: { projectId: p2.id, name: 'Piso 3 - UCI Pediátrica' } } as any,
+        update: {},
+        create: {
             projectId: p2.id,
             name: 'Piso 3 - UCI Pediátrica',
             imageUrl: '/floorplans/uci-pediatrica-hall-b.png',

@@ -100,9 +100,7 @@ export default async function ComprasPage({
                 }
             />
 
-            <div className="relative z-10 space-y-6">
-                <div className="absolute -top-20 -left-20 w-96 h-96 bg-[#1CB7BE]/5 rounded-full blur-[80px] pointer-events-none" />
-                <div className="absolute top-1/2 right-0 w-64 h-64 bg-blue-500/5 rounded-full blur-[100px] pointer-events-none" />
+            <div className="space-y-6">
 
                 <StaggerContainer className="space-y-6">
                     {/* Statistics Cards */}
@@ -125,7 +123,7 @@ export default async function ComprasPage({
                             <div className="flex items-center justify-center gap-2">
                                 {page > 1 && (
                                     <Link href={`/compras?${new URLSearchParams({ ...params, page: (page - 1).toString() }).toString()}`}>
-                                        <Button variant="outline" className="glass-card">
+                                        <Button variant="outline">
                                             Anterior
                                         </Button>
                                     </Link>
@@ -135,7 +133,7 @@ export default async function ComprasPage({
                                 </span>
                                 {page < totalPages && (
                                     <Link href={`/compras?${new URLSearchParams({ ...params, page: (page + 1).toString() }).toString()}`}>
-                                        <Button variant="outline" className="glass-card">
+                                        <Button variant="outline">
                                             Siguiente
                                         </Button>
                                     </Link>

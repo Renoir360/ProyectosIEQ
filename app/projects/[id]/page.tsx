@@ -109,14 +109,8 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
             <div className="p-6 space-y-6">
                 {/* Header Premium */}
                 <MotionWrapper direction="down">
-                    <div className="relative overflow-hidden bg-white/5 backdrop-blur-xl border border-white/20 shadow-2xl text-slate-900 rounded-2xl p-8 mb-2">
-                        {/* Internal decorative blobs for depth */}
-                        <div className="absolute top-0 right-0 w-64 h-64 bg-[#1CB7BE]/20 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
-                        <div className="absolute bottom-0 left-0 w-48 h-48 bg-blue-500/10 rounded-full blur-[80px] translate-y-1/2 -translate-x-1/2 pointer-events-none" />
-
-
-
-                        <div className="relative z-10 flex flex-col md:flex-row gap-6 items-start">
+                    <div className="relative bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm text-slate-900 dark:text-slate-100 rounded-2xl p-8 mb-2">
+                        <div className="flex flex-col md:flex-row gap-6 items-start">
                             <Link href="/projects">
                                 <Button variant="ghost" size="icon" className="glass-card hover:bg-white/20 text-slate-700 dark:text-slate-200">
                                     <ArrowLeft className="h-5 w-5" />
@@ -142,26 +136,23 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
                 </MotionWrapper>
 
                 {/* Stats */}
-                <div className="relative">
-                    {/* Decorative element for depth */}
-                    <div className="absolute -top-12 -right-12 w-64 h-64 bg-[#1CB7BE]/5 rounded-full blur-[80px]" />
-
-                    <div className="grid gap-4 md:grid-cols-4 relative z-10">
-                        <div className="glass-card p-4 rounded-lg border hover:glass-card-hover transition-all">
+                <div>
+                    <div className="grid gap-4 md:grid-cols-4">
+                        <div className="bg-white dark:bg-slate-800 p-4 rounded-lg border border-slate-200 dark:border-slate-700 shadow-sm">
                             <div className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-tight">Progreso</div>
                             <div className="text-2xl font-bold text-[#1CB7BE]">{project.progress}%</div>
                         </div>
-                        <div className="glass-card p-4 rounded-lg border hover:glass-card-hover transition-all">
+                        <div className="bg-white dark:bg-slate-800 p-4 rounded-lg border border-slate-200 dark:border-slate-700 shadow-sm">
                             <div className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-tight">Tareas Totales</div>
                             <div className="text-2xl font-bold text-slate-800">{allTasks.length}</div>
                         </div>
-                        <div className="glass-card p-4 rounded-lg border hover:glass-card-hover transition-all">
+                        <div className="bg-white dark:bg-slate-800 p-4 rounded-lg border border-slate-200 dark:border-slate-700 shadow-sm">
                             <div className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-tight">Completadas</div>
                             <div className="text-2xl font-bold text-green-600">
                                 {allTasks.filter(t => t.status === 'DONE').length}
                             </div>
                         </div>
-                        <div className="glass-card p-4 rounded-lg border hover:glass-card-hover transition-all">
+                        <div className="bg-white dark:bg-slate-800 p-4 rounded-lg border border-slate-200 dark:border-slate-700 shadow-sm">
                             <div className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-tight">Fecha Inicio</div>
                             <div className="flex items-center gap-2 font-bold text-slate-700">
                                 <Calendar className="h-4 w-4 text-[#1CB7BE]" />
@@ -172,8 +163,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
                 </div>
 
                 {/* Main Content */}
-                <div className="space-y-6 relative z-10">
-                    <div className="absolute top-20 -left-20 w-80 h-80 bg-blue-500/5 rounded-full blur-[100px] pointer-events-none" />
+                <div className="space-y-6">
                     {/* Tabs */}
                     <Tabs defaultValue="areas" className="w-full">
                         <div className="flex items-center justify-between mb-4 gap-4">
@@ -208,7 +198,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
 
                             <Accordion type="multiple" className="w-full space-y-4">
                                 {project.areas.map((area: { id: string; name: string; tasks: Record<string, unknown>[] }) => (
-                                    <AccordionItem key={area.id} value={area.id} className="border-none rounded-xl glass-card px-4 shadow-sm hover:glass-card-hover transition-all overflow-hidden">
+                                    <AccordionItem key={area.id} value={area.id} className="border-none rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-4 shadow-sm hover:shadow-md transition-shadow overflow-hidden">
                                         <AccordionTrigger className="hover:no-underline py-4">
                                             <div className="flex items-center justify-between w-full pr-4">
                                                 <span className="font-bold text-slate-800 dark:text-slate-200 tracking-tight">{area.name}</span>

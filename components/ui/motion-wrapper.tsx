@@ -13,7 +13,7 @@ interface MotionWrapperProps extends HTMLMotionProps<'div'> {
 export const MotionWrapper = ({
     children,
     delay = 0,
-    duration = 0.5,
+    duration = 0.3,
     direction = 'up',
     className,
     ...props

@@ -17,16 +17,13 @@ interface PageHeaderProps {
 export function PageHeader({ title, subtitle, actions, userName, userRole, selectedDept }: PageHeaderProps) {
     return (
         <MotionWrapper direction="down">
-            <div className="relative overflow-hidden bg-white/5 backdrop-blur-xl border border-white/20 shadow-2xl rounded-2xl p-6 sm:p-8 mb-2">
+            <div className="relative bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm rounded-2xl p-6 sm:p-8 mb-2">
                 <div className="absolute top-4 right-4 z-20 flex items-center gap-2">
                     {userRole === 'PRESIDENCIA' && (
                         <DepartmentSelector currentDept={selectedDept} userRole={userRole} />
                     )}
                     {userName && <CompactUserMenu userName={userName} />}
                 </div>
-
-                <div className="absolute top-0 right-0 w-64 h-64 bg-[var(--color-brand,#1CB7BE)]/20 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
-                <div className="absolute bottom-0 left-0 w-48 h-48 bg-blue-500/10 rounded-full blur-[80px] translate-y-1/2 -translate-x-1/2 pointer-events-none" />
 
                 <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
                     <div className="space-y-1 flex-1">

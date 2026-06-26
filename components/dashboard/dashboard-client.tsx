@@ -62,8 +62,7 @@ export function DashboardClient({ initialData, user, selectedDept }: DashboardCl
         <div className="min-h-screen">
             <div className="px-4 sm:px-6 lg:px-8 py-4 sm:py-6 space-y-4 sm:space-y-6">
                 <MotionWrapper direction="down">
-                    <div className="relative overflow-hidden glass-card !bg-white/5 text-slate-900 rounded-2xl p-6 sm:p-8 md:p-12 shadow-2xl border border-white/40 mb-2">
-                        {/* Compact user menu - top right */}
+                    <div className="relative bg-white dark:bg-slate-800 rounded-2xl p-6 sm:p-8 md:p-12 shadow-sm border border-slate-200 dark:border-slate-700 mb-2">
                         <div className="absolute top-4 right-4 z-20 flex items-center gap-2">
                             {user?.role === 'PRESIDENCIA' && (
                                 <DepartmentSelector currentDept={selectedDept} userRole={user.role} />
@@ -71,18 +70,10 @@ export function DashboardClient({ initialData, user, selectedDept }: DashboardCl
                             {user && <CompactUserMenu userName={user.name || 'Usuario'} />}
                         </div>
 
-                        {/* Internal decorative blobs for depth */}
-                        <div className="absolute top-0 right-0 w-64 h-64 bg-[#1CB7BE]/20 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
-                        <div className="absolute bottom-0 left-0 w-48 h-48 bg-blue-500/10 rounded-full blur-[80px] translate-y-1/2 -translate-x-1/2 pointer-events-none" />
-
-                        <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-8">
+                        <div className="flex flex-col md:flex-row md:items-center justify-between gap-8">
                             <div className="flex-1">
                                 <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-3 text-slate-900 dark:text-slate-100 leading-tight">
-                                    Clínica IEQ <span className="text-[#1CB7BE] relative">WorkCenter
-                                        <svg className="absolute -bottom-1 left-0 w-full h-2 text-[#1CB7BE]/30" viewBox="0 0 100 10" preserveAspectRatio="none">
-                                            <path d="M0 5 Q 25 0, 50 5 T 100 5" stroke="currentColor" strokeWidth="4" fill="transparent" />
-                                        </svg>
-                                    </span>
+                                    Clínica IEQ <span className="text-[#1CB7BE]">WorkCenter</span>
                                 </h1>
                                 <p className="text-slate-600 dark:text-slate-400 max-w-2xl leading-relaxed font-medium text-base sm:text-lg mb-4">
                                     Visualiza el avance estratégico y hitos críticos de la transformación tecnológica de Clínica IEQ.
@@ -90,18 +81,18 @@ export function DashboardClient({ initialData, user, selectedDept }: DashboardCl
                                 <div className="flex flex-wrap gap-3">
                                     {user?.role === 'SISTEMAS' && (
                                         <Link href="/projects/nuevo">
-                                            <Button className="bg-[#22C55E] hover:bg-[#16A34A] text-white font-bold shadow-lg hover:shadow-xl transition-all h-10 px-6">
+                                            <Button className="bg-[#1CB7BE] hover:bg-[#177388] text-white font-bold shadow-sm transition-all h-10 px-6">
                                                 <Plus className="mr-2 h-5 w-5" /> Nuevo Proyecto
                                             </Button>
                                         </Link>
                                     )}
                                     <Link href="/projects">
-                                        <Button variant="outline" className="glass-card border-slate-200 hover:bg-white/50 text-slate-700 font-bold transition-all shadow-sm">
+                                        <Button variant="outline" className="border-slate-200 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-bold transition-all">
                                             <LayoutGrid className="mr-2 h-4 w-4" /> Proyectos
                                         </Button>
                                     </Link>
                                     <Link href="/compras">
-                                        <Button variant="outline" className="glass-card border-slate-200 hover:bg-white/50 text-slate-700 font-bold transition-all shadow-sm">
+                                        <Button variant="outline" className="border-slate-200 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-bold transition-all">
                                             <Receipt className="mr-2 h-4 w-4" /> Compras
                                         </Button>
                                     </Link>
@@ -121,23 +112,18 @@ export function DashboardClient({ initialData, user, selectedDept }: DashboardCl
                                     </span>
                                 </div>
                             </div>
-                            <div className="flex-shrink-0 relative">
-                                <div className="absolute inset-0 bg-[#1CB7BE]/10 blur-3xl rounded-full" />
+                            <div className="flex-shrink-0">
                                 <img
                                     src="/logo-ieq.png"
                                     alt="Logo IEQ"
-                                    className="relative h-20 sm:h-28 md:h-36 w-auto object-contain transition-all hover:scale-105 duration-700 pointer-events-none"
+                                    className="h-20 sm:h-28 md:h-36 w-auto object-contain pointer-events-none"
                                 />
                             </div>
                         </div>
                     </div>
                 </MotionWrapper>
 
-                <div className="relative">
-                    {/* Decorative element for depth */}
-                    <div className="absolute -top-12 -right-12 w-64 h-64 bg-[#1CB7BE]/5 rounded-full blur-[80px]" />
-                    <KPICards stats={data.topStats} />
-                </div>
+                <KPICards stats={data.topStats} />
 
                 <div className="relative z-10 space-y-6 sm:space-y-8">
                     <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8" delayChildren={0.6}>
@@ -153,7 +139,7 @@ export function DashboardClient({ initialData, user, selectedDept }: DashboardCl
 
                             <div className="space-y-4">
                                 <div className="flex items-center gap-3 ml-2">
-                                    <div className="w-1 h-6 bg-[#1CB7BE] rounded-full shadow-[0_0_10px_rgba(28,183,190,0.5)]" />
+                                    <div className="w-1 h-6 bg-[#1CB7BE] rounded-full" />
                                     <h2 className="text-lg sm:text-xl font-extrabold text-slate-800 dark:text-slate-200 tracking-tight uppercase text-sm">Próximos Pendientes (7 días)</h2>
                                 </div>
                                 <UpcomingTasksList tasks={data.upcomingTasks} />

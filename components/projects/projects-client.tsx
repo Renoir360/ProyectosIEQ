@@ -33,10 +33,7 @@ export function ProjectsClient({ initialData, user, selectedDept }: ProjectsClie
     return (
         <div className="px-4 sm:px-6 lg:px-8 py-4 sm:py-6 space-y-4 sm:space-y-6 min-h-screen">
             <MotionWrapper direction="down">
-                <div className="relative overflow-hidden bg-white/5 backdrop-blur-xl border border-white/20 shadow-2xl rounded-2xl p-6 sm:p-8 mb-2">
-                    {/* Internal decorative blobs for depth */}
-                    <div className="absolute top-0 right-0 w-64 h-64 bg-[#1CB7BE]/20 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
-                    <div className="absolute bottom-0 left-0 w-48 h-48 bg-blue-500/10 rounded-full blur-[80px] translate-y-1/2 -translate-x-1/2 pointer-events-none" />
+                <div className="relative bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm rounded-2xl p-6 sm:p-8 mb-2">
 
                     {/* Compact user menu - top right */}
                     <div className="absolute top-4 right-4 z-20">
@@ -62,7 +59,7 @@ export function ProjectsClient({ initialData, user, selectedDept }: ProjectsClie
                         <div className="flex flex-wrap gap-3 items-center">
                             {user?.role === 'SISTEMAS' && (
                                 <Link href="/projects/nuevo">
-                                    <Button className="bg-[#22C55E] hover:bg-[#16A34A] text-white font-bold shadow-lg hover:shadow-xl transition-all h-11 px-6">
+                                    <Button className="bg-[#1CB7BE] hover:bg-[#177388] text-white font-bold shadow-sm transition-all h-11 px-6">
                                         <Plus className="mr-2 h-5 w-5" /> Nuevo Proyecto
                                     </Button>
                                 </Link>

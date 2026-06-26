@@ -23,7 +23,7 @@ interface Stats {
 function StatCard({ title, value, subtext, icon: Icon, tooltip, href }: { title: string, value: string | number, subtext: string, icon: any, tooltip: string, href?: string }) {
     return (
         <StaggerItem>
-            <div className={`glass-card rounded-xl p-6 hover:glass-card-hover transition-all duration-300 relative group`}>
+            <div className="bg-white dark:bg-slate-800 rounded-xl p-6 border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow duration-200 relative group">
                 {/* Whole Card Link Overlay - sibling to action button to avoid nesting <a> */}
                 {href && (
                     <Link href={href} className="absolute inset-0 z-0 rounded-xl" aria-label={title} />
