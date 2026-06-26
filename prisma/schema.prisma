@@ -1,0 +1,229 @@
+generator client {
+  provider = "prisma-client-js"
+  binaryTargets = ["native", "rhel-openssl-3.0.x"]
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+enum ProjectStatus {
+  PLANIFICADO
+  EN_PROGRESO
+  PAUSADO
+  COMPLETADO
+}
+
+enum TaskStatus {
+  BACKLOG
+  READY
+  IN_PROGRESS
+  DONE
+}
+
+enum TaskPriority {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+enum EvidenceType {
+  LINK
+  NOTE
+  PHOTO
+}
+
+enum PurchaseType {
+  HARDWARE
+  SOFTWARE
+  SERVICIO
+  LICENCIA
+}
+
+enum PurchasePriority {
+  NORMAL
+  ALTA
+  CRITICA
+}
+
+enum PurchaseStatus {
+  BORRADOR
+  EN_REVISION
+  APROBADO
+  RECHAZADO
+  COMPRADO
+  RECIBIDO
+}
+
+enum Department {
+  SISTEMAS
+  SUMINISTROS
+  MANTENIMIENTO
+  GLOBAL
+}
+
+model Project {
+  id          String        @id @default(cuid())
+  name        String        @unique
+  description String?
+  budget      Float?
+  startDate   DateTime?
+  endDate     DateTime?
+  status      ProjectStatus @default(PLANIFICADO)
+  progress    Int           @default(0)
+  department  Department    @default(SISTEMAS)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  areas       Area[]
+  tasks       Task[]
+  floorplans  Floorplan[]
+  purchaseRequests PurchaseRequest[]
+  auditLogs   AuditLog[]
+
+  @@map("projects")
+}
+
+model Area {
+  id        String   @id @default(cuid())
+  projectId String
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  name      String
+  notes     String?
+  tasks     Task[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([projectId, name])
+}
+
+model Task {
+  id                 String       @id @default(cuid())
+  projectId          String
+  project            Project      @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  areaId             String?
+  area               Area?        @relation(fields: [areaId], references: [id])
+  title              String
+  summary            String? // Resumen corto (1-2 líneas) para la tabla
+  description        String // Legacy / Detailed markdown
+  detailsJson        Json? // Estructura con diagnóstico/pasos/entregables
+  acceptanceCriteria String? // Definition of Done
+  dependencies       String? // Comma-separated list of dependencies
+  status             TaskStatus   @default(BACKLOG)
+  dependencyNotes    String?      @db.Text
+  priority           TaskPriority @default(MEDIUM)
+  responsible        String?
+  dueDate            DateTime?
+  orderIndex         Int          @default(0)
+  evidences          Evidence[]
+  purchaseRequests   PurchaseRequest[]
+  createdAt          DateTime     @default(now())
+  updatedAt          DateTime     @updatedAt
+
+  @@unique([projectId, title])
+  @@index([projectId])
+  @@index([status])
+  @@index([areaId])
+}
+
+
+model Evidence {
+  id         String       @id @default(cuid())
+  taskId     String
+  task       Task         @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  type       EvidenceType
+  url        String?
+  notes      String?
+  uploadedBy String?
+  uploadedAt DateTime     @default(now())
+
+  @@index([taskId])
+}
+
+model Floorplan {
+  id          String   @id @default(cuid())
+  projectId   String
+  project     Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  name        String
+  imageUrl    String
+  scale       Float?
+  notes       String?
+  accessPoints AccessPointPlacement[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model AccessPointPlacement {
+  id        String   @id @default(cuid())
+  floorplanId String
+  floorplan Floorplan @relation(fields: [floorplanId], references: [id], onDelete: Cascade)
+  name      String
+  model     String?
+  x         Float    // 0.0-1.0
+  y         Float    // 0.0-1.0
+  radius    Float    // cobertura %
+  channel   String?
+  status    String   // planificado/instalado/operativo
+  band      String?  // 5GHz/2.4GHz
+  notes     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model PurchaseRequest {
+  id             String         @id @default(cuid())
+  projectId      String?
+  project        Project?       @relation(fields: [projectId], references: [id])
+  
+  type           PurchaseType
+  title          String
+  description    String
+  justification  String
+  vendor         String?
+  vendorLink     String?
+  estimatedAmount Float
+  priority       PurchasePriority
+  status         PurchaseStatus @default(BORRADOR)
+  rejectionComments String?      @db.Text
+  department     Department     @default(SISTEMAS)
+  taskId         String?
+  task           Task?          @relation(fields: [taskId], references: [id], onDelete: SetNull)
+  
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+
+  @@index([status])
+  @@index([createdAt])
+  @@index([projectId])
+}
+
+enum UserRole {
+  SISTEMAS
+  PRESIDENCIA
+}
+
+model User {
+  id           String   @id @default(cuid())
+  name         String
+  email        String   @unique
+  passwordHash String
+  role         UserRole      @default(SISTEMAS)
+  department   Department    @default(SISTEMAS)
+  createdAt    DateTime      @default(now())
+
+  @@map("users")
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  action    String   // ej. "CAMBIO_ESTADO_TAREA", "APROBACION_COMPRA", "CREACION_PROYECTO"
+  details   String   // Descripción detallada en formato texto o markdown
+  userEmail String?
+  userName  String?
+  projectId String?
+  project   Project? @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@map("audit_logs")
+}

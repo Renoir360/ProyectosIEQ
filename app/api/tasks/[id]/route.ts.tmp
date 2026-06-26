@@ -1,0 +1,97 @@
+﻿import { NextResponse } from 'next/server'
+import prisma from '@/lib/db'
+import { updateTaskSchema } from '@/lib/validators'
+
+export const dynamic = 'force-dynamic'
+
+export async function PATCH(
+    request: Request,
+    { params }: { params: Promise<{ id: string }> }
+) {
+    try {
+        const { id } = await params
+        const body = await request.json()
+        const result = updateTaskSchema.safeParse(body)
+
+        if (!result.success) {
+            console.error('[TASK_PATCH] Invalid body:', body)
+            console.error('[TASK_PATCH] Validation error:', result.error.flatten())
+            return NextResponse.json(result.error.flatten(), { status: 400 })
+        }
+
+        // Atomic transaction
+        const updatedTask = await prisma.$transaction(async (tx) => {
+            // 1. Get current task for JSON merge if needed
+            const currentTask = await tx.task.findUnique({
+                where: { id },
+                select: { detailsJson: true, projectId: true }
+            })
+
+            if (!currentTask) {
+                throw new Error('Task not found')
+            }
+
+            // 2. Prepare update data with Deep Merge for detailsJson
+            const updateData: any = { ...result.data }
+
+            // Delete metadata fields if they exist in result.data but not in DB
+            // (Zod should have filtered them, but being safe)
+
+            if (result.data.detailsJson) {
+                const currentDetails = (currentTask.detailsJson as any) || {}
+                updateData.detailsJson = {
+                    ...currentDetails,
+                    ...result.data.detailsJson
+                }
+            }
+
+            // 3. Update the task
+            const task = await tx.task.update({
+                where: { id },
+                data: updateData
+            })
+
+            // 4. Fetch Aggregates for the Project
+            const projectId = task.projectId
+            const total = await tx.task.count({ where: { projectId } })
+            const done = await tx.task.count({ where: { projectId, status: 'DONE' } })
+            const inProgress = await tx.task.count({ where: { projectId, status: 'IN_PROGRESS' } })
+
+            // 5. Recalculate Progress
+            let progress = 0
+            if (total > 0) {
+                progress = Math.round((done / total) * 100)
+            }
+
+            // 6. Derive Status
+            let projectStatus: 'PLANNED' | 'ACTIVE' | 'DONE' = 'PLANNED'
+
+            if (total > 0 && done === total) {
+                projectStatus = 'DONE'
+            } else if (inProgress > 0 || done > 0) {
+                projectStatus = 'ACTIVE'
+            }
+
+            // 7. Update Project
+            await tx.project.update({
+                where: { id: projectId },
+                data: {
+                    progress,
+                    status: projectStatus
+                }
+            })
+
+            return task
+        })
+
+        return NextResponse.json(updatedTask)
+    } catch (error: any) {
+        console.error('[TASK_PATCH_ERROR]', error)
+        return NextResponse.json(
+            { error: error?.message || 'Internal Server Error' },
+            { status: 500 }
+        )
+    }
+}
+```
+
