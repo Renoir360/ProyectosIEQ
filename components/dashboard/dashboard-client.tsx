@@ -10,7 +10,6 @@ import { LayoutGrid, Receipt, Plus, RefreshCw } from 'lucide-react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { CompactUserMenu } from '@/components/ui/compact-user-menu'
-import { DepartmentSelector } from '@/components/layout/department-selector'
 import { MotionWrapper, StaggerContainer, StaggerItem } from '../ui/motion-wrapper'
 
 const StatusChart = lazy(() => import('./charts').then(m => ({ default: m.StatusChart })))
@@ -38,13 +37,11 @@ interface DashboardData {
 interface DashboardClientProps {
     initialData: DashboardData
     user: DashboardUser | null
-    selectedDept?: string
 }
 
-export function DashboardClient({ initialData, user, selectedDept }: DashboardClientProps) {
-    // TanStack Query with client-side caching and background synchronization
+export function DashboardClient({ initialData, user }: DashboardClientProps) {
     const { data, refetch, isFetching } = useQuery({
-        queryKey: ['dashboard', selectedDept],
+        queryKey: ['dashboard'],
         queryFn: async () => {
             const res = await fetch('/api/dashboard')
             if (!res.ok) throw new Error('Network response was not ok')
@@ -63,10 +60,7 @@ export function DashboardClient({ initialData, user, selectedDept }: DashboardCl
             <div className="px-4 sm:px-6 lg:px-8 py-4 sm:py-6 space-y-4 sm:space-y-6">
                 <MotionWrapper direction="down">
                     <div className="relative bg-white dark:bg-slate-800 rounded-2xl p-6 sm:p-8 md:p-12 shadow-sm border border-slate-200 dark:border-slate-700 mb-2">
-                        <div className="absolute top-4 right-4 z-20 flex items-center gap-2">
-                            {user?.role === 'PRESIDENCIA' && (
-                                <DepartmentSelector currentDept={selectedDept} userRole={user.role} />
-                            )}
+                        <div className="absolute top-4 right-4 z-20">
                             {user && <CompactUserMenu userName={user.name || 'Usuario'} />}
                         </div>
 

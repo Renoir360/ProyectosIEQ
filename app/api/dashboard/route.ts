@@ -1,8 +1,6 @@
 import { NextResponse } from 'next/server'
 import prisma from '@/lib/db'
 import { getCurrentUser } from '@/lib/auth'
-import { getDepartmentWhere } from '@/lib/department'
-import { cookies } from 'next/headers'
 import { TASK_STATUS_LABEL } from '@/lib/status'
 
 const TaskStatus = {
@@ -21,10 +19,7 @@ const TaskPriority = {
 export async function GET() {
     try {
         const user = await getCurrentUser()
-        const cookieStore = await cookies()
-        const selectedDept = cookieStore.get('selected_department')?.value
-
-        const where: any = user ? getDepartmentWhere(user as any, selectedDept) : {}
+        const where = {}
 
         const now = new Date()
         const next7Days = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000)

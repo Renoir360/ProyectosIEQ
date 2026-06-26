@@ -8,8 +8,6 @@ import { StaggerContainer, StaggerItem } from '@/components/ui/motion-wrapper'
 import { getCurrentUser } from '@/lib/auth'
 import { PurchaseStatsCards } from '@/components/purchases/purchase-stats-cards'
 import { PageHeader } from '@/components/layout/page-header'
-import { getDepartmentWhere } from '@/lib/department'
-import { cookies } from 'next/headers'
 import { Suspense } from 'react'
 
 export const dynamic = 'force-dynamic'
@@ -28,26 +26,12 @@ export default async function ComprasPage({
 }) {
     const params = await searchParams
     const user = await getCurrentUser()
-    const cookieStore = await cookies()
-    const selectedDept = cookieStore.get('selected_department')?.value
-    const deptWhere: any = user ? getDepartmentWhere(user as any, selectedDept) : {}
 
     const page = parseInt(params.page || '1')
     const limit = 10
     const skip = (page - 1) * limit
 
-    // Build where clause
-    const where: any = { ...deptWhere } // Start with dept filter (Wait, PurchaseRequest needs project filter or something?)
-    // PurchaseRequest has `project` relation. Schema doesn't have department on PurchaseRequest directly.
-    // It has `projectId` -> `project`.
-    // So if Department filter is { department: '...' }, we need { project: { department: '...' } }
-
-    // Check key in deptWhere
-    if (deptWhere.department) {
-        where.project = { department: deptWhere.department }
-        delete where.department // Remove top level if invalid
-    }
-
+    const where: any = {}
     if (params.type && params.type !== 'ALL') where.type = params.type
     if (params.status && params.status !== 'ALL') where.status = params.status
     if (params.projectId && params.projectId !== 'ALL') where.projectId = params.projectId
@@ -66,7 +50,6 @@ export default async function ComprasPage({
         }),
         prisma.purchaseRequest.count({ where }),
         prisma.project.findMany({
-            where: deptWhere, // Use dept filter for projects list too!!
             select: { id: true, name: true },
             orderBy: { name: 'asc' }
         })
@@ -77,21 +60,20 @@ export default async function ComprasPage({
     return (
         <div className="px-4 sm:px-6 lg:px-8 py-4 sm:py-6 space-y-4 sm:space-y-6 min-h-screen">
             <PageHeader
-                title={<>Solicitudes de <span className="text-[var(--color-brand,#1CB7BE)]">Compra</span></>}
+                title={<>Solicitudes de <span className="text-[#1CB7BE]">Compra</span></>}
                 subtitle="Gestión de solicitudes de compra para el Departamento de Sistemas IEQ."
                 userName={user?.name || 'Usuario'}
                 userRole={user?.role}
-                selectedDept={selectedDept}
                 actions={
                     <>
                         <Link href="/dashboard">
-                            <Button variant="outline" className="glass-card border-slate-200 hover:bg-white/50 text-slate-700 font-bold transition-all shadow-sm">
+                            <Button variant="outline" className="border-slate-200 hover:bg-slate-50 text-slate-700 font-bold transition-all">
                                 <Home className="mr-2 h-4 w-4" /> Dashboard
                             </Button>
                         </Link>
                         {user?.role === 'SISTEMAS' && (
                             <Link href="/compras/nueva">
-                                <Button className="bg-[var(--color-brand,#1CB7BE)] hover:bg-[var(--color-brand,#1CB7BE)]/90 text-white font-bold shadow-lg">
+                                <Button className="bg-[#1CB7BE] hover:bg-[#177388] text-white font-bold shadow-sm">
                                     <Plus className="mr-2 h-4 w-4" /> Nueva Solicitud
                                 </Button>
                             </Link>
@@ -101,9 +83,7 @@ export default async function ComprasPage({
             />
 
             <div className="space-y-6">
-
                 <StaggerContainer className="space-y-6">
-                    {/* Statistics Cards */}
                     <StaggerItem>
                         <Suspense fallback={<div className="h-40" />}>
                             <PurchaseStatsCards />
@@ -123,9 +103,7 @@ export default async function ComprasPage({
                             <div className="flex items-center justify-center gap-2">
                                 {page > 1 && (
                                     <Link href={`/compras?${new URLSearchParams({ ...params, page: (page - 1).toString() }).toString()}`}>
-                                        <Button variant="outline">
-                                            Anterior
-                                        </Button>
+                                        <Button variant="outline">Anterior</Button>
                                     </Link>
                                 )}
                                 <span className="text-sm text-slate-600 font-medium px-4">
@@ -133,9 +111,7 @@ export default async function ComprasPage({
                                 </span>
                                 {page < totalPages && (
                                     <Link href={`/compras?${new URLSearchParams({ ...params, page: (page + 1).toString() }).toString()}`}>
-                                        <Button variant="outline">
-                                            Siguiente
-                                        </Button>
+                                        <Button variant="outline">Siguiente</Button>
                                     </Link>
                                 )}
                             </div>

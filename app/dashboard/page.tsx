@@ -2,7 +2,6 @@ import prisma from '@/lib/db'
 import { TASK_STATUS_LABEL } from '@/lib/status'
 import { getCurrentUser } from '@/lib/auth'
 import { getDepartmentWhere } from '@/lib/department'
-import { cookies } from 'next/headers'
 import { DashboardClient } from '../../components/dashboard/dashboard-client'
 
 const TaskStatus = {
@@ -119,17 +118,13 @@ async function getDashboardData(whereClause: any) {
 
 export default async function DashboardPage() {
     const user = await getCurrentUser()
-    const cookieStore = await cookies()
-    const selectedDept = cookieStore.get('selected_department')?.value
-
-    const where: any = user ? getDepartmentWhere(user as any, selectedDept) : {}
+    const where = getDepartmentWhere()
     const initialData = await getDashboardData(where)
 
     return (
-        <DashboardClient 
-            initialData={initialData} 
-            user={user} 
-            selectedDept={selectedDept} 
+        <DashboardClient
+            initialData={initialData}
+            user={user}
         />
     )
 }

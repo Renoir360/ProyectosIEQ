@@ -7,17 +7,15 @@ import Link from 'next/link'
 import { Home, Plus, RefreshCw } from 'lucide-react'
 import { MotionWrapper } from '@/components/ui/motion-wrapper'
 import { CompactUserMenu } from '@/components/ui/compact-user-menu'
-import { DepartmentSelector } from '@/components/layout/department-selector'
 
 interface ProjectsClientProps {
     initialData: any
     user: any
-    selectedDept?: string
 }
 
-export function ProjectsClient({ initialData, user, selectedDept }: ProjectsClientProps) {
+export function ProjectsClient({ initialData, user }: ProjectsClientProps) {
     const { data: projectsResponse, refetch, isFetching } = useQuery({
-        queryKey: ['projects', selectedDept],
+        queryKey: ['projects'],
         queryFn: async () => {
             const res = await fetch('/api/projects')
             if (!res.ok) throw new Error('Failed to fetch projects')
@@ -42,19 +40,12 @@ export function ProjectsClient({ initialData, user, selectedDept }: ProjectsClie
 
                     <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
                         <div className="space-y-1 flex-1">
-                            <div className="flex justify-between items-start">
-                                <div>
-                                    <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-slate-100">
-                                        Portafolio de <span className="text-[#1CB7BE]">Proyectos</span>
-                                    </h1>
-                                    <p className="text-slate-600 dark:text-slate-400 font-semibold max-w-2xl leading-relaxed text-base sm:text-lg text-pretty">
-                                        Gestión estratégica y monitoreo de la cartera de proyectos tecnológicos IEQ 2026.
-                                    </p>
-                                </div>
-                                {user?.role === 'PRESIDENCIA' && (
-                                    <DepartmentSelector currentDept={selectedDept} userRole={user.role} />
-                                )}
-                            </div>
+                            <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-slate-100">
+                                Portafolio de <span className="text-[#1CB7BE]">Proyectos</span>
+                            </h1>
+                            <p className="text-slate-600 dark:text-slate-400 font-semibold max-w-2xl leading-relaxed text-base sm:text-lg text-pretty">
+                                Gestión estratégica y monitoreo de la cartera de proyectos tecnológicos IEQ 2026.
+                            </p>
                         </div>
                         <div className="flex flex-wrap gap-3 items-center">
                             {user?.role === 'SISTEMAS' && (

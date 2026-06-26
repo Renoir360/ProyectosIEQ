@@ -2,8 +2,6 @@ import { NextResponse } from 'next/server'
 import prisma from '@/lib/db'
 import { z } from 'zod'
 import { getCurrentUser } from '@/lib/auth'
-import { cookies } from 'next/headers'
-import { getDepartmentWhere } from '@/lib/department'
 
 const projectSchema = z.object({
     name: z.string().min(3, 'El nombre debe tener al menos 3 caracteres'),
@@ -50,9 +48,7 @@ export async function POST(req: Request) {
 export async function GET(req: Request) {
     try {
         const user = await getCurrentUser()
-        const cookieStore = await cookies()
-        const selectedDept = cookieStore.get('selected_department')?.value
-        const where: any = user ? getDepartmentWhere(user as any, selectedDept) : {}
+        const where = {}
 
         const { searchParams } = new URL(req.url)
         const page = parseInt(searchParams.get('page') || '1')

@@ -3,7 +3,6 @@
 import { ReactNode } from 'react'
 import { MotionWrapper } from '@/components/ui/motion-wrapper'
 import { CompactUserMenu } from '@/components/ui/compact-user-menu'
-import { DepartmentSelector } from '@/components/layout/department-selector'
 
 interface PageHeaderProps {
     title: ReactNode
@@ -11,17 +10,13 @@ interface PageHeaderProps {
     actions?: ReactNode
     userName?: string
     userRole?: string
-    selectedDept?: string
 }
 
-export function PageHeader({ title, subtitle, actions, userName, userRole, selectedDept }: PageHeaderProps) {
+export function PageHeader({ title, subtitle, actions, userName }: PageHeaderProps) {
     return (
         <MotionWrapper direction="down">
             <div className="relative bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm rounded-2xl p-6 sm:p-8 mb-2">
-                <div className="absolute top-4 right-4 z-20 flex items-center gap-2">
-                    {userRole === 'PRESIDENCIA' && (
-                        <DepartmentSelector currentDept={selectedDept} userRole={userRole} />
-                    )}
+                <div className="absolute top-4 right-4 z-20">
                     {userName && <CompactUserMenu userName={userName} />}
                 </div>
 
