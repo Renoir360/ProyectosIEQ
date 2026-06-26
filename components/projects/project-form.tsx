@@ -137,19 +137,7 @@ export function ProjectForm() {
                         </Select>
                     </div>
 
-                    <div>
-                        <Label htmlFor="department" className="text-slate-700 font-semibold mb-2 block">
-                            Departamento <span className="text-red-500">*</span>
-                        </Label>
-                        <Select name="department" defaultValue="SISTEMAS" required>
-                            <SelectTrigger className="bg-white/50 border-white/30 focus:border-[#1CB7BE] transition-all">
-                                <SelectValue placeholder="Seleccionar departamento" />
-                            </SelectTrigger>
-                            <SelectContent>
-                                <SelectItem value="SISTEMAS">Sistemas</SelectItem>
-                            </SelectContent>
-                        </Select>
-                    </div>
+                    <input type="hidden" name="department" value="SISTEMAS" />
 
                     <div>
                         <Label htmlFor="startDate" className="text-slate-700 font-semibold mb-2 block">
