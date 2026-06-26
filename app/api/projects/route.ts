@@ -12,7 +12,7 @@ const projectSchema = z.object({
     startDate: z.string().optional().nullable(),
     endDate: z.string().optional().nullable(),
     status: z.enum(['PLANIFICADO', 'EN_PROGRESO', 'PAUSADO', 'COMPLETADO']),
-    department: z.enum(['SISTEMAS', 'SUMINISTROS', 'MANTENIMIENTO', 'GLOBAL']).default('SISTEMAS'),
+    department: z.enum(['SISTEMAS', 'GLOBAL']).default('SISTEMAS'),
     progress: z.number().min(0).max(100).default(0)
 })
 

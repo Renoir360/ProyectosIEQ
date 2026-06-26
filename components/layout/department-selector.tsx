@@ -34,8 +34,6 @@ export function DepartmentSelector({ userRole, currentDept, className }: Departm
                     <SelectContent>
                         <SelectItem value="GLOBAL">Global (Todos)</SelectItem>
                         <SelectItem value="SISTEMAS">Sistemas</SelectItem>
-                        <SelectItem value="SUMINISTROS">Suministros</SelectItem>
-                        <SelectItem value="MANTENIMIENTO">Mantenimiento</SelectItem>
                     </SelectContent>
                 </Select>
             </div>

@@ -59,8 +59,6 @@ enum PurchaseStatus {
 
 enum Department {
   SISTEMAS
-  SUMINISTROS
-  MANTENIMIENTO
   GLOBAL
 }
 
